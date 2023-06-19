@@ -1,0 +1,72 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+
+<style>
+    .pagination{
+        align-content: center;
+        align-self: center;
+    }
+    #paginator-section{
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
+    body{
+        background-color: rgb(158, 233, 60);
+    }
+</style>
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Products</h5>
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>PRODUCTS</th>
+                    <th>CATEGORY</th>
+                    <th>PRICE</th>
+                </tr>
+                {% for i in page_obj %}
+                <tr>
+                    <td><b>{{i.name}}</b></td>
+                    <td>{{i.category}}</td>
+                    <td>{{i.price}}</td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+    <div class="pagination" id="paginator-section">
+        {% if page_obj.has_previous %}
+            <button><a class="btn btn-primary btn-sm btn-block" href="?page=1">&laquo; First Page</a></button>
+            <button><a class="btn btn-primary btn-sm btn-block" href="?page={{ page_obj.previous_page_number }}">Previous Page</a></button>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <button><a class="btn btn-primary btn-sm m-1 p-1" href="?page={{ page_obj.next_page_number }}">Next Page</a></button>
+            <button><a class="btn btn-primary btn-sm" href="?page={{ page_obj.paginator.num_pages }}">Last Page &raquo;</a></button>
+        {% endif %}
+    </div>
+
+
+
+
+
+
+{% endblock content %}
+
+

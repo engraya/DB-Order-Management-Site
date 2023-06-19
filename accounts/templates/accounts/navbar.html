@@ -1,0 +1,55 @@
+{% load static %}
+
+<style>
+  .hello-msg{
+    font-size: 20px;
+    color: azure;
+    margin-right: 20px;
+    box-shadow: none;
+  }
+  #pic{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg p-0 navbar-dark bg-dark">
+    <img src="{% static 'images/git.png' %}">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        {% if request.user.is_staff %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">DashBoard</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'products' %}">Products</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'account' %}">Accounts Settings</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user-page' %}">User Page</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/">Settings</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+
+
+    <img id="pic" class="profile-pic p-1 m-2" src="{{request.user.customer.profile_pic.url}}">
+    <span class="hello-msg">Welcome, {{request.user}}</span>
+    <button class="btn btn-danger btn-sm m-1 " href="{% url 'logout' %}">Logout</button>
+    <button class="btn btn-primary btn-sm m-1" href="{% url 'register' %}">Register</button>
+    
+
+</nav>
+
+
